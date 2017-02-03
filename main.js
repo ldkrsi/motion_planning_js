@@ -30,12 +30,16 @@ $(document).on('mousedown', scope.touch_panel.selector, function(e){
 		result.call(scope,false);
 	}, 1000 / 30.0);
 });
-$(document).on('mouseup', scope.touch_panel.selector, function(e){
+$(document).on('mouseup', 'body', function(e){
 	if(scope.mouse_event.interval_id === null){
 		return;
 	}
-	clearInterval(scope.mouse_event.interval_id);
-	scope.onmouseup();
+	var interval_id = scope.mouse_event.interval_id;
+	scope.mouse_event.interval_id = null;
+	clearInterval(interval_id);
+	setTimeout(function(){
+		scope.onmouseup.call(scope);
+	}, 1000/30.0);
 	
 });
 $(document).on('mousemove', scope.touch_panel.selector, function(e){

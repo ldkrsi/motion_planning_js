@@ -402,14 +402,12 @@ CanvasPanel.prototype.onmousedown = function(x,y){
 	return null;
 };
 CanvasPanel.prototype.onmouseup = function(){
-	this.mouse_event.interval_id = null;
+	this.mouse_event.draw_function.call(this,false);
 	if(this.intersect_evnet()){
 		this.mouse_event.object.init_config = this.mouse_event.obj_init_config.slice();
+		this.mouse_event.draw_function.call(this,false);
 	}
-	else{
-		this.make_potential_fields();
-	}
-	this.mouse_event.draw_function.call(this,false);
+	this.make_potential_fields();
 	this.mouse_event.reset();
 }
 CanvasPanel.prototype.move_object = function(x,y){
