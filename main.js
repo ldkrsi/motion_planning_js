@@ -17,6 +17,7 @@ $.getJSON('map.json', function(data){
 	scope.draw_robots_layer();
 	scope.draw_goals_layer();
 	scope.make_potential_fields();
+	$('.map-info').html(JSON.stringify(data, undefined, 4));
 });
 
 $(document).on('mousedown', scope.touch_panel.selector, function(e){
