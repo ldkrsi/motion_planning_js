@@ -4,7 +4,8 @@ var globe_config = {
 	'view_size': [400.0, 400.0],
 	'layer': {
 		'touch_layer': 'touch-layer',
-		'potential_layer': 'potential'
+		'potential_layer': 'potential',
+		'axis_layer': 'axis',
 	},
 	'search_directs': [[1,0,0], [0,1,0], [-1,0,0], [0,-1,0], [0,0,2], [0,0,-2]]
 };

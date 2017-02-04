@@ -20,6 +20,7 @@ h1{
 }
 h2{
 	font-size: $h1-font-size*0.8;
+	margin-bottom: 10px;
 }
 p{
 	margin-bottom: 5px;
@@ -71,6 +72,7 @@ a{
 		padding: 5px;
 		border-bottom: 1px solid #aaa;
 		margin-bottom: 5px;
+		padding-bottom: 5px;
 	}
 	width: 200px;
 }

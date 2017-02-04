@@ -301,17 +301,82 @@ MouseEvent.prototype.add_click_point = function(x,y,obj){
 
 function TouchLayer(dom_id, config){
 	this.view_size = config['view_size'];
-	this.selector = '#' + dom_id;
 	this.canvas = document.getElementById(dom_id);
 	this.ctx = this.canvas.getContext('2d');
 	this.canvas.width = this.view_size[0];
 	this.canvas.height = this.view_size[1];
 };
 
+function Axis(dom_id, config){
+	this.canvas = document.getElementById(dom_id);
+	this.ctx = this.canvas.getContext('2d');
+	this.view_size = config['view_size'];
+	this.map_size = config['map_size'];
+	this.canvas.width = this.view_size[0];
+	this.canvas.height = this.view_size[1];
+	this.draw();
+}
+Axis.prototype.draw = function(){
+	this.draw_lines();
+	var ctx = this.ctx;
+	ctx.font = 'normal normal normal 10px/1.4 Arial';
+	ctx.textAlign = 'left';
+	ctx.textBaseline = 'bottom';
+	ctx.fillStyle = 'rgba(0,0,0,0.6)';
+	ctx.fillText(
+		(this.map_size[0]*0.5).toFixed(1),
+		this.view_size[0]*0.5,
+		this.view_size[1]
+	);
+	ctx.fillText(
+		(this.map_size[0]*0.25).toFixed(1),
+		this.view_size[0]*0.25,
+		this.view_size[1]
+	);
+	ctx.fillText(
+		(this.map_size[0]*0.75).toFixed(1),
+		this.view_size[0]*0.75,
+		this.view_size[1]
+	);
+	ctx.fillText(
+		(this.map_size[1]*0.5).toFixed(1),
+		0,
+		this.view_size[1]*0.5
+	);
+	ctx.fillText(
+		(this.map_size[1]*0.25).toFixed(1),
+		0,
+		this.view_size[1]*0.75
+	);
+	ctx.fillText(
+		(this.map_size[1]*0.75).toFixed(1),
+		0,
+		this.view_size[1]*0.25
+	);
+}
+Axis.prototype.draw_lines = function(){
+	var ctx = this.ctx;
+	ctx.beginPath();
+	ctx.moveTo(this.view_size[0]*0.5,this.view_size[1]);
+	ctx.lineTo(this.view_size[0]*0.5,0);
+	ctx.moveTo(this.view_size[0]*0.25,this.view_size[1]);
+	ctx.lineTo(this.view_size[0]*0.25,0);
+	ctx.moveTo(this.view_size[0]*0.75,this.view_size[1]);
+	ctx.lineTo(this.view_size[0]*0.75,0);
+	ctx.moveTo(0,this.view_size[1]*0.5);
+	ctx.lineTo(this.view_size[0],this.view_size[1]*0.5);
+	ctx.moveTo(0,this.view_size[1]*0.25);
+	ctx.lineTo(this.view_size[0],this.view_size[1]*0.25);
+	ctx.moveTo(0,this.view_size[1]*0.75);
+	ctx.lineTo(this.view_size[0],this.view_size[1]*0.75);
+	ctx.strokeStyle = 'rgba(0,0,0,0.3)';
+	ctx.stroke();
+}
 function CanvasPanel(){
 	this.touch_panel = new TouchLayer(globe_config['layer']['touch_layer'], globe_config);
 	this.mouse_event = new MouseEvent();
 	this.potential = new PotentialLayer(globe_config);
+	this.axis = new Axis(globe_config['layer']['axis_layer'], globe_config);
 };
 CanvasPanel.prototype.init_robots = function(robot){
 	this.robot = robot;
