@@ -468,7 +468,8 @@ CanvasPanel.prototype.make_potential_fields_button = function(){
 			.attr('data-control-point-index', j).addClass('potential-field-button');
 		$('.potential-fields').append(btn);
 	}
-	$('.potential-fields').append('<br/>');
+	$('.potential-fields').append($('<button></button>').html('clear').addClass('clear-potential-field-button'));
+	
 };
 CanvasPanel.prototype.show_potential_fields = function(j){
 	var target = this.robot.potential_fields[j];
@@ -484,6 +485,9 @@ CanvasPanel.prototype.show_potential_fields = function(j){
 			this.potential.draw_point([x,y],value);
 		}
 	}
+};
+CanvasPanel.prototype.clear_potential_fields = function(j){
+	this.potential.clear();
 };
 CanvasPanel.prototype.get_solution2 = function(){
 	for(var i = 0; i< this.robots.length; ++i){
