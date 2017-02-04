@@ -58,7 +58,7 @@ $(document).on('click','.potential-field-button',function(e){
 	scope.show_potential_fields(j);
 });
 $(document).on('click','.clear-potential-field-button',function(e){
-	scope.clear_potential_fields(j);
+	scope.clear_potential_fields();
 });
 $(document).on('click','button.run',function(e){
 	scope.get_solution();
